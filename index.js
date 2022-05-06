@@ -25,11 +25,19 @@ async function run() {
 
     // ------->Items API Start<-------
 
+    // GET API
     app.get("/items", async (req, res) => {
       const query = {};
       const cursor = itemsCollection.find(query);
       const items = await cursor.toArray();
       res.send(items);
+    });
+
+    // POST API
+    app.post("/item", async (req, res) => {
+      const data = req.body;
+      const result = await itemsCollection.insertOne(data);
+      res.send(result);
     });
 
     // ------->Items API End<-------
