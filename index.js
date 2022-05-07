@@ -62,7 +62,7 @@ async function run() {
       res.send(result);
     });
 
-    // PUT API
+    // PUT API for update stock value
     app.put("/item/:id", async (req, res) => {
       const id = req.params.id;
       const updateItem = req.body;
@@ -70,7 +70,7 @@ async function run() {
       const options = { upsert: true };
       const updatedDoc = {
         $set: {
-          stock: updateItem.name,
+          stock: updateItem.stock,
         },
       };
       const result = await itemsCollection.updateOne(
