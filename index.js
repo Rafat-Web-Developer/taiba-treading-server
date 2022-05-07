@@ -62,6 +62,25 @@ async function run() {
       res.send(result);
     });
 
+    // PUT API
+    app.put("/item/:id", async (req, res) => {
+      const id = req.params.id;
+      const updateItem = req.body;
+      const filter = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updatedDoc = {
+        $set: {
+          stock: updateItem.name,
+        },
+      };
+      const result = await itemsCollection.updateOne(
+        filter,
+        updatedDoc,
+        options
+      );
+      res.send(result);
+    });
+
     // ------->Items API End<-------
   } finally {
   }
