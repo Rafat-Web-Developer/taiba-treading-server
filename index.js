@@ -21,7 +21,6 @@ function verifyJWT(req, res, next) {
     if (err) {
       return res.status(403).send({ message: "Forbidden access", status: 403 });
     }
-    console.log("decoded", decoded);
     req.decoded = decoded;
     next();
   });
